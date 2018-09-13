@@ -35,49 +35,39 @@ class App extends Component {
     super(props);
     this.state = { 
     text: '', 
-    colors: [],
+    colorOne: '',
+    colorTwo: '',
     color: 'black',
     };
     this.handleChange = this.handleChange.bind(this);
     this.onChangeColor = this.onChangeColor.bind(this);
+    this.componentDidMount = this.componentDidMount.bind(this);
   }
   
 
   componentDidMount() {
     var url = 'http://www.colr.org/json/color/random';
-    var colorOne =
     fetch(url)
-      .then(function(response) {
-        return response.json();
-      })
-      .then(function(json) {
-        return console.log(json);
-      });
-    var colorTwo = 
+    .then(response => { response.json()
+    .then(json => {
+      this.setState({ colorOne: '#'+json.new_color })
+    })});
     fetch(url)
-    .then(function(response) {
-      return response.json();
-    })
-    .then(function(json) {
-      return console.log(json);
-    });
-    var data = [colorOne, colorTwo];
-    var colorss = data.map(function(color) {
-      return `#${color.hex}`;
-    });
-    this.setState({ colors: colorss });
+    .then(response => { response.json()
+    .then(json => {
+      this.setState({ colorTwo: '#'+json.new_color })
+    })});
 }
 
 
   onChangeColor() {
-    var i = Math.floor(Math.random() * this.state.colors.length);
-    if(this.state.color === 'black')
-    this.setState(
-    { color: this.state.colors[i] }
-    );
+    var i = Math.floor((Math.random() * 2) + 1);
+    if(this.state.color === 'black') {
+      if(i===1) this.setState((previous) => ({color: previous.colorOne}));
+      else if(i===2) this.setState((previous) => ({color: previous.colorTwo}));
+    }
     else    
-       this.setState(
-         { color: 'black' });
+       this.setState({ color: 'black' });
   }
 
 
