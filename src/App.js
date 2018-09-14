@@ -1,31 +1,8 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import cs from 'classnames';
-import './TextInput.css';
-import './RandomColor.css';
-
-
-function TextInput(props) {
-  return <input
-    className={cs(['input', props.className])}
-    type={props.type}
-    onChange={props.onChange}
-    placeholder={props.placeholder}
-    value={props.value}
-  />
-}
-
-
-function RandomColor(props) {
-  return <div
-    className={cs(['center', props.className])}
-    style={{backgroundColor: props.color}}
-    onClick={props.onClick}
-  >
-    {'Klick me!'}
-  </div>
-}
+import TextInput from './sidefunct/TextInput';
+import RandomColor from './sidefunct/RandomColor';
 
 
 
